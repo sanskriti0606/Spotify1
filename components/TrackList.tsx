@@ -1,33 +1,19 @@
+// import React from 'react';
+import AudioPlayer from './AudioPlayer';
+
 interface TrackProps {
-  item?: any;
-  index?: any;
+  item: any;
 }
-import React from "react";
-import AudioPlayer from "./AudioPlayer";
 
-const TrackList = ({ item, index }: TrackProps) => {
-  const { artists, external_urls, track_number, name, preview_url } = item;
-  console.log(item);
-  console.log(index);
+const TrackList = ({ item }: TrackProps) => {
+  const { name, artists, track_number, preview_url } = item;
+
   return (
-    <li
-      key={index}
-      className="flex items-center justify-between py-4 border-b border-gray-400"
-    >
-      <div className="flex items-center">
-        <span className="text-dark mr-4">{track_number}.</span>
-        <div>
-          <h3 className="text-dark font-bold">{name}</h3>
-
-          {artists?.map((item: any, index: any) => (
-            <p className="text-dark" key={index}>
-              {item.name}
-            </p>
-          ))}
-        </div>
+    <li className="flex justify-between items-center py-2">
+      <div>
+        <h3 className="text-white font-bold">{name}</h3>
+        <p className="text-gray-400">{artists.map((artist: any) => artist.name).join(', ')}</p>
       </div>
-
-      {/* <a href="" className="text-blue-500 hover:text-blue-300">Play</a> */}
       <AudioPlayer preview_url={preview_url} />
     </li>
   );
